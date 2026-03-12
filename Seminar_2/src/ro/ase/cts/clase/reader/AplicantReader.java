@@ -7,27 +7,28 @@ import java.util.List;
 import java.util.Scanner;
 
 public abstract class AplicantReader {
-    public abstract List<Aplicant> readAplicanti(String file) throws FileNotFoundException;
-    protected void readApplicant(Scanner fileScanner, Aplicant outAplicant){
+    protected String numeFisier;
+    public abstract List<Aplicant> readAplicanti() throws FileNotFoundException;
 
-        String nume = fileScanner.next();
-        String prenume = fileScanner.next();
-        int varsta = fileScanner.nextInt();
-        int punctaj = fileScanner.nextInt();
-        int nrProiecte = fileScanner.nextInt();
-        String[] denumireProiect = new String[nrProiecte];
+    public AplicantReader(String numeFisier) {
+        this.numeFisier = numeFisier;
+    }
 
-        for (int i = 0; i < nrProiecte; i++) {
-            denumireProiect[i] = fileScanner.next();
-        }
+    protected void readAplicant(Scanner input, Aplicant outAplicant){
+        String nume = input.next();
+        String prenume = input.next();
+        int varsta = Integer.parseInt(input.next());
+        int punctaj = Integer.valueOf(input.nextInt());
+        int nr = Integer.valueOf(input.nextInt());
+        String[] vect = new String[nr];
+        for (int i = 0; i < nr; i++)
+            vect[i] = input.next();
 
         outAplicant.setNume(nume);
         outAplicant.setPrenume(prenume);
         outAplicant.setVarsta(varsta);
+        outAplicant.setNr_proiecte(nr, vect);
         outAplicant.setPunctaj(punctaj);
-        outAplicant.setNrProiecte(nrProiecte);
-        outAplicant.setDenumireProiect(denumireProiect);
     }
+
 }
-
-

@@ -2,53 +2,44 @@ package ro.ase.cts.clase;
 
 import java.util.Arrays;
 
-public class Student extends Aplicant{
-	protected String facultate;
-	protected int anStudii;
+public class Student extends Aplicant {
+    protected String facultate;
+    protected int an_studii;
+    public static int valoareFinantareStudent = 20;
 
-	public String getFacultate() {
-		return this.facultate;
-	}
+    public void setFacultate(String facultate) {
+        this.facultate = facultate;
+    }
+    public void setAn_studii(int an_studii) {
+        this.an_studii = an_studii;
+    }
+    public static void setValoareFinantareStudent(int valoareFinantareStudent) {
+        Student.valoareFinantareStudent = valoareFinantareStudent;
+    }
 
-	public void setFacultate(String facultate) {
-		this.facultate = facultate;
-	}
+    public Student() {
+        super();
+    }
 
-	public int getAnStudii() {
-		return this.anStudii;
-	}
+    @Override
+    public void afiseazaFinantare() {
+        System.out.println("Studentul "+getNume()+" "+getPrenume()+" primeste " + Student.valoareFinantareStudent
+                +" Euro/zi in proiect.");
+    }
 
-	public void setAnStudii(int anStudii) {
-		this.anStudii = anStudii;
-	}
+    public Student(String nume, String prenume, int varsta, int punctaj, int nr_proiecte, String[] denumireProiect, String facultate, int an_studii) {
+        super(nume,prenume,varsta,punctaj,nr_proiecte,denumireProiect);
+        this.facultate = facultate;
+        this.an_studii = an_studii;
+    }
 
-	public Student() {
-		super();
-	}
-	
-	public Student(String nume, String prenume, int varsta, int punctaj, int nrProiecte,
-				   String[] denumireProiect, String facultate, int anStudii) {
-		super(nume,prenume,varsta,punctaj,nrProiecte,denumireProiect);
-		this.facultate = facultate;
-		this.anStudii = anStudii;
-	}
-
-	@Override
-	public String toString() {
-		return "Student: Nume=" + super.nume + ", Prenume=" + super.prenume + ", Varsta=" + super.varsta +
-				", Punctaj=" + super.punctaj + ", Nr_proiecte=" +
-				super.nrProiecte +  ", DenumireProiect=" + Arrays.toString(super.denumireProiect) +
-				"Facultate=" + this.facultate + ", An_studii=" + this.anStudii ;
-	}
-
-	@Override
-	public int finantare(int suma) {
-		if(super.statut()){
-			System.out.println("Studentul " + super.getNume() + " " + super.getPrenume() +
-					" primeste " + suma + " Euro/zi in proiect.");
-			return suma;
-		}
-
-		return 0;
-	}
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Student{");
+        sb.append(super.toString());
+        sb.append("facultate='").append(facultate).append('\'');
+        sb.append(", an_studii=").append(an_studii);
+        sb.append('}');
+        return sb.toString();
+    }
 }

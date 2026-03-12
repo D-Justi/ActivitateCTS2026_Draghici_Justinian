@@ -1,84 +1,80 @@
 package ro.ase.cts.clase;
 
-public abstract class Aplicant{
-	protected String nume;
-	protected String prenume;
-	protected int varsta;
-	protected int punctaj;
-	protected int nrProiecte;
-	protected String[] denumireProiect;
+import java.util.Arrays;
 
-	public Aplicant() {
-		super();
-	}
+public abstract class Aplicant {
+    protected String nume;
+    protected String prenume;
+    protected int varsta;
+    protected int punctaj;
+    protected int nr_proiecte;
+    protected String[] denumireProiect;
+    protected static int pragPunctaj = 80;
 
-	public Aplicant(String nume, String prenume, int varsta, int punctaj, int nrProiecte, String[] denumireProiect) {
-		super();
-		this.nume = nume;
-		this.prenume = prenume;
-		this.varsta = varsta;
-		this.punctaj = punctaj;
-		this.nrProiecte = nrProiecte;
-		this.denumireProiect = denumireProiect;
-	}
 
-	public String getNume() {
-		return this.nume;
-	}
+    public String getNume() {
+        return nume;
+    }
+    public void setNume(String nume) {
+        this.nume = nume;
+    }
+    public String getPrenume() {
+        return prenume;
+    }
+    public void setPrenume(String prenume) {
+        this.prenume = prenume;
+    }
+    public void setVarsta(int varsta) {
+        this.varsta = varsta;
+    }
+    public void afiseazaStatut() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Aplicantul");
+        sb.append(this.nume).append(" ").append(this.prenume);
+        sb.append((this.punctaj > Aplicant.pragPunctaj) ? " a": " nu a");
+        sb.append(" fost acceptat");
 
-	public void setNume(String nume) {
-		this.nume = nume;
-	}
+        System.out.println(sb.toString());
+    }
 
-	public String getPrenume() {
-		return this.prenume;
-	}
+    public int getPunctaj() {
+        return punctaj;
+    }
 
-	public void setPrenume(String prenume) {
-		this.prenume = prenume;
-	}
+    public void setPunctaj(int punctaj) {
+        this.punctaj = punctaj;
+    }
 
-	public int getVarsta() {
-		return this.varsta;
-	}
+    public Aplicant() {
+        super();
+    }
 
-	public void setVarsta(int varsta) {
-		this.varsta = varsta;
-	}
+    public Aplicant(String nume, String prenume, int varsta, int punctaj, int nr_proiecte, String[] denumireProiect) {
+        super();
+        this.nume = nume;
+        this.prenume = prenume;
+        this.varsta = varsta;
+        this.punctaj = punctaj;
+        this.nr_proiecte = nr_proiecte;
+        this.denumireProiect = denumireProiect;
+    }
 
-	public int getPunctaj() {
-		return this.punctaj;
-	}
+    public void setNr_proiecte(int nr_proiecte, String[] denumireProiect) {
+        this.nr_proiecte = nr_proiecte;
+        this.denumireProiect = denumireProiect;
+    }
 
-	public void setPunctaj(int punctaj) {
-		this.punctaj = punctaj;
-	}
+    public abstract void afiseazaFinantare();
 
-	public int getNrProiecte() {
-		return this.nrProiecte;
-	}
-
-	public void setNrProiecte(int nrProiecte) {
-		this.nrProiecte = nrProiecte;
-	}
-
-	public String[] getDenumireProiect() {
-		return this.denumireProiect;
-	}
-
-	public void setDenumireProiect(String[] denumireProiect) {
-		this.denumireProiect = denumireProiect;
-	}
-
-	public boolean statut(){
-		if(this.punctaj > 80) {
-			System.out.println("Aplicantul " + this.nume + " " + this.prenume + " a fost acceptat.");
-			return true;
-		}
-
-		System.out.println("Aplicantul " + this.nume + " " + this.prenume + " nu a fost acceptat.");
-		return false;
-	}
-
-	public abstract int finantare(int suma);
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+        sb.append("nume='").append(nume).append('\'');
+        sb.append(", prenume='").append(prenume).append('\'');
+        sb.append(", varsta=").append(varsta);
+        sb.append(", punctaj=").append(punctaj);
+        sb.append(", nr_proiecte=").append(nr_proiecte);
+        sb.append(", denumireProiect=").append(Arrays.toString(denumireProiect));
+        return sb.toString();
+    }
 }
